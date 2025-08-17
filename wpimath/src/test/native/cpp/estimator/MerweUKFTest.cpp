@@ -67,8 +67,8 @@ frc::Vectord<5> DriveGlobalMeasurementModel(
   return frc::Vectord<5>{x(0), x(1), x(2), x(3), x(4)};
 }
 
-TEST(MerweUKFTest, DriveInit) {
-  constexpr auto dt = 5_ms;
+TEST(UnscentedKalmanFilterTest, DriveInit) {
+  constexpr units::second_t dt = 5_ms;
 
   frc::MerweUKF<5, 2, 3> observer{DriveDynamics,
                                   DriveLocalMeasurementModel,
@@ -93,8 +93,8 @@ TEST(MerweUKFTest, DriveInit) {
                       frc::AngleResidual<5>(2), frc::AngleAdd<5>(2));
 }
 
-TEST(MerweUKFTest, DriveConvergence) {
-  constexpr auto dt = 5_ms;
+TEST(UnscentedKalmanFilterTest, DriveConvergence) {
+  constexpr units::second_t dt = 5_ms;
   constexpr auto rb = 0.8382_m / 2.0;  // Robot radius
 
   frc::MerweUKF<5, 2, 3> observer{DriveDynamics,
@@ -205,8 +205,8 @@ TEST(MerweUKFTest, LinearUKF) {
   EXPECT_NEAR(ref(0, 0), observer.Xhat(0), 5);
 }
 
-TEST(MerweUKFTest, RoundTripP) {
-  constexpr auto dt = 5_ms;
+TEST(UnscentedKalmanFilterTest, RoundTripP) {
+  constexpr units::second_t dt = 5_ms;
 
   frc::MerweUKF<2, 2, 2> observer{
       [](const frc::Vectord<2>& x, const frc::Vectord<2>& u) { return x; },

@@ -67,7 +67,7 @@ class ExtendedKalmanFilterTest {
 
   @Test
   void testInit() {
-    double dt = 0.00505;
+    double dtSeconds = 0.005;
 
     assertDoesNotThrow(
         () -> {
@@ -97,8 +97,8 @@ class ExtendedKalmanFilterTest {
 
   @Test
   void testConvergence() {
-    double dt = 0.00505;
-    double rb = 0.8382 / 2.0; // Robot radius
+    double dtSeconds = 0.005;
+    double rbMeters = 0.8382 / 2.0; // Robot radius
 
     ExtendedKalmanFilter<N5, N2, N3> observer =
         new ExtendedKalmanFilter<>(
